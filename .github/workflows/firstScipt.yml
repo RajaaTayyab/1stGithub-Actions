@@ -1,21 +1,19 @@
-name: Hello World Script
-on: [push]
+name: HELLO World Scipt 
+on : [push]
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+  runs-on : ubuntu-latest
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    
+    - name: Run Hello World
+      run: echo "Hello World"
 
-      - name: Run Hello World Script
-        run: echo "Hello, World!"
-        
-      - name: Run a multi-line script
-        run: |
-          echo "This is a multi-line script."
-          echo "It can run multiple commands."
-          echo "Goodbye, World!"
-      - name: Display current directory
-        run: pwd
-      - name: Create a Text File 
-        run: touch example.txt 
+    - name: Print my working Directory
+      run: pwd
+
+    - name : Create a textfile
+      run : touch myfile.txt 
+    
+    
