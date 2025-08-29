@@ -3,7 +3,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest #sepcifying runner machine
 
     steps:
       - name: Checkout repository
@@ -17,3 +17,17 @@ jobs:
 
       - name: Create a textfile
         run: touch myfile.txt
+      
+      - name: Adding text inside the textfile
+        run : echo "This is a file" > myfile.txt 
+      
+      - name: Pushing it it my repo 
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add .
+          git commit -m "Added the file"
+          git push origin HEAD: main
+        
+        evv:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
