@@ -1,19 +1,19 @@
-name: HELLO World Scipt 
-on : [push]
+name: HELLO World Script
+on: [push]
+
 jobs:
   build:
-  runs-on : ubuntu-latest
-  steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-    
-    - name: Run Hello World
-      run: echo "Hello World"
+    runs-on: ubuntu-latest
 
-    - name: Print my working Directory
-      run: pwd
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name : Create a textfile
-      run : touch myfile.txt 
-    
-    
+      - name: Run Hello World
+        run: echo "Hello World"
+
+      - name: Print my working Directory
+        run: pwd
+
+      - name: Create a textfile
+        run: touch myfile.txt
