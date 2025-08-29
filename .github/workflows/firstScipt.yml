@@ -19,9 +19,9 @@ jobs:
         run: touch myfile.txt
       
       - name: Adding text inside the textfile
-        run : echo "This is a file" > myfile.txt 
+        run: echo "This is a file" > myfile.txt 
       
-      - name: Pushing it it my repo 
+      - name: Pushing it to my repo 
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
@@ -29,4 +29,4 @@ jobs:
           git commit -m "Added the file"
           git push origin HEAD:main
         env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
