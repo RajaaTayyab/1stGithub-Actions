@@ -20,7 +20,7 @@ jobs:
         run: pwd
 
       - name: Create a textfile
-        run: touch myfile.txt
+        run: touch myfile1.txt
 
       - name: Adding text inside the textfile
         run: echo "This is a file" > myfile.txt
