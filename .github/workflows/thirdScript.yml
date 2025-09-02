@@ -15,6 +15,10 @@ jobs:
           - { name: "Umar", age: 18, gender: "Male" }
           - { name: "Ahmed", age: 21, gender: "Male" }
 
+    
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
     steps:
       - name: Printing personal information
         run: |
@@ -25,3 +29,4 @@ jobs:
           echo "Name is: $NAME"
           echo "Age is: $AGE"
           echo "Gender is: $GENDER"
+        
