@@ -5,28 +5,30 @@ on: [workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      people-output: ${{ steps.set-matrix.outputs.people-output }}
+    steps:
+      - name: Setting up the matrix in build job
+        id: set-matrix
+        run: |
+          PEOPLE='[
+            { "name": "Tayyab", "age": 20, "gender": "Male" },
+            { "name": "Armaghan", "age": 22, "gender": "Male" },
+            { "name": "Ayesha", "age": 19, "gender": "Female" },
+            { "name": "Umar", "age": 18, "gender": "Male" },
+            { "name": "Ahmed", "age": 21, "gender": "Male" }
+          ]'
+          echo "people-matrix=$PEOPLE" >> $GITHUB_OUTPUT
 
-    strategy:
-      matrix:
-        People:
-          - { name: "Tayyab", age: 20, gender: "Male" }
-          - { name: "Armaghan", age: 22, gender: "Male" }
-          - { name: "Ayesha", age: 19, gender: "Female" }
-          - { name: "Umar", age: 18, gender: "Male" }
-          - { name: "Ahmed", age: 21, gender: "Male" }
-
-    
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        person: ${{ fromJson(needs.build.outputs.people-matrix) }}
     steps:
-      - name: Printing personal information
+      - name: Print person info
         run: |
-          NAME="${{ matrix.People.name }}"
-          AGE="${{ matrix.People.age }}"
-          GENDER="${{ matrix.People.gender }}"
-
-          echo "Name is: $NAME"
-          echo "Age is: $AGE"
-          echo "Gender is: $GENDER"
-        
+          echo "Name: ${{ matrix.person.name }}"
+          echo "Age: ${{ matrix.person.age }}"
+          echo "Gender: ${{ matrix.person.gender }}"
