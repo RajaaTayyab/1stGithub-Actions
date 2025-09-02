@@ -1,0 +1,24 @@
+name: Third yaml Script
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        People:
+        - { name: "Tayyab" , age: 20, gender: "Male" }
+        - { name: "Armaghan" , age: 22, gender: "Male" }
+        - { name: "Ayesha", age: 19, gender: "Female" }
+        - { name: "Umar", age: 18, gender: "Male" }
+        - {name: "Ahmed", age: 21, gender: "Male" }
+  
+  steps:
+    - name: Printing personal information
+    - run: |
+      Name: "${ {matrix.People.name }}"
+      Age: "$ {{ matrix.People.Age }}"
+      Gender: ${{matrix.People.gender}}
+
+      echo "Name is: $Name"
+      echo "Age is: $Age"
+      echo "Gender is: $Gender"
