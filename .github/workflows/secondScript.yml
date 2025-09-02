@@ -1,0 +1,31 @@
+name: Second yaml Script
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest 
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Building a project
+        run: echo "It is Building...."
+    
+    test:
+      needs: build
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Run test
+          run: echo "The testing is underway"
+    
+    deploy:
+      needs: test
+      runs-on: ubuntu-latest
+
+      steps:
+      - name: Deploy test
+        run: echo "Deploying"
+
+
