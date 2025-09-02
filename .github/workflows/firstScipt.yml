@@ -1,11 +1,13 @@
 name: HELLO World Script
+
 on: [push]
 
 permissions:
   contents: write
+
 jobs:
   build:
-    runs-on: ubuntu-latest #sepcifying runner machine
+    runs-on: ubuntu-latest # specifying runner machine
 
     steps:
       - name: Checkout repository
@@ -19,16 +21,20 @@ jobs:
 
       - name: Create a textfile
         run: touch myfile.txt
-      
+
       - name: Adding text inside the textfile
-        run: echo "This is a file" > myfile.txt 
-      
-      - name: Pushing it to my repo 
+        run: echo "This is a file" > myfile.txt
+
+      - name: Pushing it to my repo
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add .
-          git commit -m "Added the file"
-          git push origin HEAD:main
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Added the file"
+            git push origin HEAD:main
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
